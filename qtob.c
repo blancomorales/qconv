@@ -1,3 +1,4 @@
+/* See LICENSE file for copyright and license details. */
 #include "qnum.h"
 
 static char buf[(sizeof(long) + 1) * 8];
@@ -12,6 +13,7 @@ static char itoc(register int i)
 	return '\0';
 }
 
+/* Convert fraction n to string in base b. */
 const char *qtob(qnum n, int b)
 {
 	long ip;

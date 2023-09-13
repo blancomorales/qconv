@@ -1,3 +1,4 @@
+/* See LICENSE file for copyright and license details. */
 #include "qnum.h"
 
 static int ctoi(register char c)
@@ -9,6 +10,7 @@ static int ctoi(register char c)
 	return ((unsigned) ~0) >> 1;
 }
 
+/* Convert string s in base b to fraction. */
 qnum btoq(const char *s, int b)
 {
 	int sign, dot;

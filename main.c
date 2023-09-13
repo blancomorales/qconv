@@ -1,3 +1,4 @@
+/* See LICENSE file for copyright and license details. */
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -6,6 +7,7 @@
 extern qnum btoq(const char *str, int base);
 extern const char *qtob(qnum nmb, int base);
 
+/* Convert number from any base to another base. */
 int main(int argc, char **argv)
 {
 	qnum n;

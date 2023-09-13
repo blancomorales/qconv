@@ -1,3 +1,5 @@
+/* See LICENSE file for copyright and license details. */
+
 typedef struct {
 	long num;
 	long den;
