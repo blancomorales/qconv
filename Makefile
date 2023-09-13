@@ -2,7 +2,7 @@
 SRC = main.c qtob.c btoq.c qnum.c
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = -std=c89 -O2 -Wall -pedantic -Wextra
+CFLAGS = -std=c99 -O2 -Wall -pedantic -Wextra
 
 qconv: $(OBJ)
 	gcc -o $@ $^

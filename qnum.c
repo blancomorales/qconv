@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 #include "qnum.h"
 
-static long gcd(long a, long b)
+static long long gcd(long long a, long long b)
 {
 	while (b != 0) {
 		a %= b;
@@ -16,7 +16,7 @@ static long gcd(long a, long b)
 /* Reduce fraction n to lowest terms. */
 void qnum_reduce(qnum *n)
 {
-	long d = gcd(n->num, n->den);
+	long long d = gcd(n->num, n->den);
 
 	n->num /= d;
 	n->den /= d;

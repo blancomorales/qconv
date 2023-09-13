@@ -35,11 +35,11 @@ qnum btoq(const char *s, int b)
 			dot = 1;
 			continue;
 		}
-		if (n.num >= LONG_MAX / b) {
+		if (n.num >= LLONG_MAX / b) {
 			errno = ERANGE;
 			break;
 		}
-		if (n.den >= LONG_MAX / b)
+		if (n.den >= LLONG_MAX / b)
 			break;
 		if (ctoi(*s) >= b)
 			break;

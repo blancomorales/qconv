@@ -4,7 +4,7 @@
 
 #include "qnum.h"
 
-static char buf[(sizeof(long) + 1) * 8];
+static char buf[(sizeof(long long) + 1) * 8];
 static char *endc = buf + sizeof(buf) - 1;
 
 static char itoc(register int i)
@@ -19,7 +19,7 @@ static char itoc(register int i)
 /* Convert fraction n to string in base b. */
 const char *qtob(qnum n, int b)
 {
-	long ip;
+	long long ip;
 	int neg = n.num < 0;
 	char *s = buf, *t = endc;
 
@@ -48,7 +48,7 @@ const char *qtob(qnum n, int b)
 			n.num = n.num * b;
 			qnum_reduce(&n);
 			*s++ = itoc((n.num / n.den) % b);
-		} while (n.den > 1 && n.num < LONG_MAX / b && s < endc);
+		} while (n.den > 1 && n.num < LLONG_MAX / b && s < endc);
 	}
 
 	*s = '\0';
