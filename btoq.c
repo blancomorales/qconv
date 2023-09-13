@@ -1,4 +1,6 @@
 /* See LICENSE file for copyright and license details. */
+#include <limits.h>
+
 #include "qnum.h"
 
 static int ctoi(register char c)
@@ -27,6 +29,8 @@ qnum btoq(const char *s, int b)
 			dot = 1;
 			continue;
 		}
+		if (n.num >= LONG_MAX / b || n.den >= LONG_MAX / b)
+			break;
 		if (ctoi(*s) >= b)
 			break;
 		n.num = n.num * b + ctoi(*s);

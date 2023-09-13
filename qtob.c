@@ -1,4 +1,6 @@
 /* See LICENSE file for copyright and license details. */
+#include <limits.h>
+
 #include "qnum.h"
 
 static char buf[(sizeof(long) + 1) * 8];
@@ -40,7 +42,7 @@ const char *qtob(qnum n, int b)
 			n.num = n.num * b;
 			qnum_reduce(&n);
 			*s++ = itoc((n.num / n.den) % b);
-		} while (n.den > 1 && s < endc);
+		} while (n.den > 1 && n.num < LONG_MAX / b && s < endc);
 	}
 
 	*s = '\0';
