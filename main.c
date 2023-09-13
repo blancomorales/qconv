@@ -1,4 +1,6 @@
 /* See LICENSE file for copyright and license details. */
+#include <err.h>
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -19,7 +21,12 @@ int main(int argc, char **argv)
 	}
 
 	n = btoq(s, atoi(argv[2]));
+	if (errno)
+		err(errno, NULL);
+
 	s = qtob(n, atoi(argv[3]));
+	if (errno)
+		err(errno, NULL);
 
 	puts(s);
 	exit(0);

@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <errno.h>
 #include <limits.h>
 
 #include "qnum.h"
@@ -18,6 +19,11 @@ qnum btoq(const char *s, int b)
 	int sign, dot;
 	qnum n = {0, 1};
 
+	if (2 > b || b > 36) {
+		errno = EINVAL;
+		return n;
+	}
+
 	while (*s == ' ' || *s == '\t')
 		++s;
 	sign = (*s == '-') ? -1 : 1;
@@ -29,7 +35,11 @@ qnum btoq(const char *s, int b)
 			dot = 1;
 			continue;
 		}
-		if (n.num >= LONG_MAX / b || n.den >= LONG_MAX / b)
+		if (n.num >= LONG_MAX / b) {
+			errno = ERANGE;
+			break;
+		}
+		if (n.den >= LONG_MAX / b)
 			break;
 		if (ctoi(*s) >= b)
 			break;

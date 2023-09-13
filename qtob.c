@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <errno.h>
 #include <limits.h>
 
 #include "qnum.h"
@@ -21,6 +22,11 @@ const char *qtob(qnum n, int b)
 	long ip;
 	int neg = n.num < 0;
 	char *s = buf, *t = endc;
+
+	if (2 > b || b > 26) {
+		errno = EINVAL;
+		return (char *) 0;
+	}
 
 	if (neg)
 		n.num = -n.num;
