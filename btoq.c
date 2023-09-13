@@ -30,9 +30,9 @@ qnum btoq(const char *s, int b)
 	if (*s == '-' || *s == '+')
 		++s;
 
-	for (dot = 0; *s != '\0'; ++s) {
-		if (*s == '.' && !dot) {
-			dot = 1;
+	for (dot = 0; !dot || ctoi(*s) < b; ++s) {
+		if (*s == '.') {
+			dot = ~0;
 			continue;
 		}
 		if (n.num >= LLONG_MAX / b) {
@@ -40,8 +40,6 @@ qnum btoq(const char *s, int b)
 			break;
 		}
 		if (n.den >= LLONG_MAX / b)
-			break;
-		if (ctoi(*s) >= b)
 			break;
 		n.num = n.num * b + ctoi(*s);
 		if (dot)
